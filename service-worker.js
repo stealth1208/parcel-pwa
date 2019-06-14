@@ -4,7 +4,9 @@ self.addEventListener('install', event => {
     cache.addAll([
       './',
       './index.html',
-      './index.js'
+      './index.js',
+      './manifest.webmanifest',
+      './pwa-icon.png'
     ])
   });
 })
@@ -21,9 +23,17 @@ self.addEventListener('fetch', event => {
 
 function cacheFirst(req) {
   return caches.open('pwa-demo')
-      .then(cache => {
-        return cache.match(req)
-
-      })
-
+    .then(cache => {
+      return cache.match(req)
+    });
 }
+
+self.addEventListener('push', event => {
+  console.log('push', event)
+  const message = event.data.text();
+  self.registration.showNotification('This is Title!', {
+    body: `${message}`,
+    requireInteraction: true,
+    icon: './pwa-icon.png',
+  });
+})

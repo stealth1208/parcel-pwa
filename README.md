@@ -14,3 +14,4 @@
 ### Test on phone
 ```npx serve dist/```
 
+**Notes**: parcel(bug) always parse *manifest.json* to manifest.js, so the manifest file MUST be *manifest.webmanifest*(or anything without  .json)

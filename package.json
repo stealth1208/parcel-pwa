@@ -1,7 +1,5 @@
 {
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-plugin-transform-runtime": "^6.23.0",
     "parcel-plugin-static-files-copy": "^2.1.2"
   },
   "name": "pwa-parcel",
@@ -9,11 +7,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build --no-content-hash index.html *.js *.png *.ico *.css"
+    "dev": "parcel index.html -p 3000",
+    "build": "yarn clean && parcel build --no-content-hash index.html *.js *.png *.ico *.css *.json",
+    "clean": "rimraf './dist/'"
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   }

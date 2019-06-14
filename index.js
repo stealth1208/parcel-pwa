@@ -1,12 +1,29 @@
 import React from 'react';
-import ReactDom from 'react-dom'
+import ReactDom from 'react-dom';
 
 
-if (`serviceWorker` in navigator) {
-  window.addEventListener(`load`, () => {
+window.addEventListener(`load`, () => {
+  if (`serviceWorker` in navigator) {
     navigator.serviceWorker.register(`service-worker.js`)
+  } else {
+    throw new Error ('Service worker is not supported!');
+  }
 
-  })
+  if ('PushManager' in window)  {
+    askPermission();
+  } else {
+    throw new Error ('Push manager is not supported!');
+  }
+});
+
+function askPermission() {
+  Notification.requestPermission()
+    .then((permission) => {
+      console.log('permission', permission)
+    })
+    .catch(error => {
+      throw new Error(error)
+    })
 }
 
 function App() {
